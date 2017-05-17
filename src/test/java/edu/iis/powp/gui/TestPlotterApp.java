@@ -16,6 +16,7 @@ import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
+import edu.iis.powp.zoom.DrawToZoomCommand;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -98,6 +99,23 @@ public class TestPlotterApp {
 				(ActionEvent e) -> logger.setLevel(Level.SEVERE));
 		application.addComponentMenuElement(Logger.class, "OFF logging", (ActionEvent e) -> logger.setLevel(Level.OFF));
 	}
+	
+	private static void setupZoomIn(Application application) {
+		DrawPanelController drawerController = FeaturesManager.drawerController();
+
+		IPlotter draw = new DrawToZoomCommand(drawerController, LineFactory.getBasicLine(), "X 2");
+		application.addZoomInElement("x 2", draw);
+		application.addZoomInElement("x 3", null);
+		application.addZoomInElement("x 4", null);
+		application.addZoomInElement("x 5", null);
+	}
+	
+	private static void setupZoomOut(Application application) {
+		application.addZoomOutElement("x 1.5", null);
+		application.addZoomOutElement("x 2", null);
+		application.addZoomOutElement("x 3", null);
+		application.addZoomOutElement("x 5", null);
+	}
 
 	/**
 	 * Launch the application.
@@ -113,6 +131,8 @@ public class TestPlotterApp {
 				setupCommandTests(app);
 				setupLogger(app);
 				setupWindows(app);
+				setupZoomIn(app);
+				setupZoomOut(app);
 
 				app.setVisibility(true);
 			}

@@ -47,6 +47,10 @@ public class PlotterGUI extends JFrame {
 	 * Window menu.
 	 */
 	private JMenu windowMenu = null;
+	
+	private JMenu zoomInMenu = null;
+	
+	private JMenu zoomOutMenu = null;
 
 	/**
 	 * Test menu.
@@ -151,6 +155,12 @@ public class PlotterGUI extends JFrame {
 		 */
 		windowMenu = new JMenu("Windows");
 		menuBar.add(windowMenu);
+		
+		zoomInMenu = new JMenu("Zoom In");
+		menuBar.add(zoomInMenu);
+		
+		zoomOutMenu = new JMenu("Zoom Out");
+		menuBar.add(zoomOutMenu);
 
 		/*
 		 * Main girdBagLayout - left Layout + command history.
@@ -269,7 +279,19 @@ public class PlotterGUI extends JFrame {
 		testMenuButton.addActionListener(listener);
 		testMenu.add(testMenuButton);
 	}
-
+	
+	public void addNewZoomInMenuListener(ActionListener listener, String label) {
+		JMenuItem zoomInMenuButton = new JMenuItem(label);
+		zoomInMenuButton.addActionListener(listener);
+		zoomInMenu.add(zoomInMenuButton);
+	}
+	
+	public void addNewZoomOutMenuListener(ActionListener listener, String label) {
+		JMenuItem zoomOutMenuButton = new JMenuItem(label);
+		zoomOutMenuButton.addActionListener(listener);
+		zoomOutMenu.add(zoomOutMenuButton);
+	}
+	
 	public void notifyObservers(String message) {
 
 	}

@@ -45,4 +45,46 @@ public class LineAdapterPlotterDriver implements IPlotter
     {
         return "Plotter Simulator - " + name;
     }
+
+	public ILine getLine() {
+		return line;
+	}
+
+	public void setLine(ILine line) {
+		this.line = line;
+	}
+
+	public int getStartX() {
+		return startX;
+	}
+
+	public void setStartX(int startX) {
+		this.startX = startX;
+	}
+
+	public int getStartY() {
+		return startY;
+	}
+
+	public void setStartY(int startY) {
+		this.startY = startY;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public DrawPanelController getDrawController() {
+		return drawController;
+	}
+
+	public void setDrawController(DrawPanelController drawController) {
+		this.drawController = drawController;
+	}
+    
+    
 }

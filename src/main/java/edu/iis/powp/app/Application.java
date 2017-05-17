@@ -146,6 +146,15 @@ public class Application {
 			boolean checkBoxState) {
 		gui.addComponentMenuElementWithCheckBox(compClass, label, listener, checkBoxState);
 	}
+	
+	public void addZoomInElement(String name, IPlotter plotter) {
+		SelectDriverMenuOptionListener listener = new SelectDriverMenuOptionListener(plotter, driverManager);
+		gui.addNewZoomInMenuListener(listener, name);
+	}
+	
+	public void addZoomOutElement(String name, ActionListener listener) {
+		gui.addNewZoomOutMenuListener(listener, name);
+	}
 
 	/**
 	 * Set visibility.
