@@ -17,6 +17,8 @@ import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
 import edu.iis.powp.zoom.DrawToZoomCommand;
+import edu.iis.powp.zoom.SelectZoomIn2xCommandListener;
+import edu.iis.powp.zoom.SelectZoomOut2xCommandListener;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -47,7 +49,9 @@ public class TestPlotterApp {
 		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
 
 		application.addTest("Run command", new SelectRunCurrentCommandOptionListener());
-
+		
+		application.addTest("Zoom in 2x command", new SelectZoomIn2xCommandListener());
+		application.addTest("Zoom out 2x command", new SelectZoomOut2xCommandListener());
 	}
 
 	/**
