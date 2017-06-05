@@ -16,6 +16,9 @@ public class PlotterCommandManager
     private IPlotterCommand currentCommand = null;
     
     private Publisher changePublisher = new Publisher(); 
+    
+    private List<IPlotterCommand> plotterCommands;
+
 
 	/**
      * Set current command.
@@ -36,9 +39,8 @@ public class PlotterCommandManager
      */
     public synchronized void setCurrentCommand(List<IPlotterCommand> commandList, String name)
     {
+    	this.plotterCommands = commandList;
     	setCurrentCommand(new ICompoundCommand() {
-			
-    		List<IPlotterCommand> plotterCommands = commandList;
     		
 			@Override
 			public void execute(IPlotter plotter) {
@@ -81,5 +83,10 @@ public class PlotterCommandManager
 
 	public Publisher getChangePublisher() {
 		return changePublisher;
+	}
+
+	public List<IPlotterCommand> getPlotterCommands() {
+	
+		return  plotterCommands;
 	}
 }

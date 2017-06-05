@@ -9,6 +9,22 @@ public class SetPositionCommand implements IPlotterCommand {
 
 	private int posX, posY;
 	
+	public int getPosY() {
+		return posY;
+	}
+
+	public void setPosY(int posY) {
+		this.posY = posY;
+	}
+
+	public int getPosX() {
+		return posX;
+	}
+
+	public void setPosX(int posX) {
+		this.posX = posX;
+	}
+
 	public SetPositionCommand(int posX, int posY) {
 		super();
 		this.posX = posX;
