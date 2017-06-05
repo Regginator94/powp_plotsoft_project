@@ -40,6 +40,7 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		content.add(btnZoom2, c);
 
 		JButton btnZoom3 = new JButton("Zoom In 3x");
+		btnZoom3.addActionListener((ActionEvent e) -> this.zoomManager.setCurrentZoom(3));
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -47,6 +48,7 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		content.add(btnZoom3, c);
 		
 		JButton btnZoom02 = new JButton("Zoom Out 2x");
+		btnZoom02.addActionListener((ActionEvent e) -> this.zoomManager.setCurrentZoom(-2));
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -54,6 +56,7 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		content.add(btnZoom02, c);
 		
 		JButton btnZoom03 = new JButton("Zoom Out 3x");
+		btnZoom03.addActionListener((ActionEvent e) -> this.zoomManager.setCurrentZoom(-3));
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
