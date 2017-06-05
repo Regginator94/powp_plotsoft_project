@@ -5,6 +5,7 @@ import edu.iis.powp.app.DriverManager;
 import edu.iis.powp.command.manager.LoggerCommandChangeObserver;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.events.predefine.SelectClearPanelOptionListener;
+import edu.iis.powp.zoom.ZoomManager;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 
 public class FeaturesManager {
@@ -14,6 +15,12 @@ public class FeaturesManager {
 	private static PlotterCommandManager commandManager;
 	private static DriverManager driverManager;
 	private static DrawPanelController drawerController;
+	private static ZoomManager zoomManager;
+
+
+	public static void setZoomManager(ZoomManager zoomManager) {
+		FeaturesManager.zoomManager = zoomManager;
+	}
 
 	/**
 	 * Startup configuration.
@@ -34,6 +41,11 @@ public class FeaturesManager {
 
 		LoggerCommandChangeObserver loggerObserver = new LoggerCommandChangeObserver();
 		commandManager.getChangePublisher().addSubscriber(loggerObserver);
+	}
+	
+	public static void setupZoomManager() {
+		zoomManager = new ZoomManager();
+
 	}
 
 	/**
@@ -78,4 +90,9 @@ public class FeaturesManager {
 	public static PlotterCommandManager getPlotterCommandManager() {
 		return commandManager;
 	}
+	
+	public static ZoomManager getZoomManager() {
+		return zoomManager;
+	}
+
 }

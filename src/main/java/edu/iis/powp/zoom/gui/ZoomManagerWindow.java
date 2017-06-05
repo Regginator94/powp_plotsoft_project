@@ -3,32 +3,36 @@ package edu.iis.powp.zoom.gui;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.event.ActionEvent;
+
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JTextArea;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.window.WindowComponent;
+import edu.iis.powp.zoom.ZoomManager;
 public class ZoomManagerWindow extends JFrame implements WindowComponent{
 
 	private JTextArea observerListField;
-
+	private ZoomManager zoomManager;
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 9204679248304669948L;
 
-	public ZoomManagerWindow(PlotterCommandManager commandManager) {
+	public ZoomManagerWindow(ZoomManager zoomManager) {
 		this.setTitle("Zoom Manager");
 		this.setSize(400, 400);
 		Container content = this.getContentPane();
 		content.setLayout(new GridBagLayout());
-
+		this.zoomManager = zoomManager;
 		GridBagConstraints c = new GridBagConstraints();
 
 		observerListField = new JTextArea("");
 		observerListField.setEditable(false);
 
 		JButton btnZoom2 = new JButton("Zoom In 2x");
+		btnZoom2.addActionListener((ActionEvent e) -> this.zoomManager.setCurrentZoom(2));
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;
 		c.gridx = 0;
@@ -55,7 +59,14 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnZoom03, c);
+		
+		
+
+
+		
 	}
+
+
 
 	@Override
 	public void HideIfVisibleAndShowIfHidden() {
