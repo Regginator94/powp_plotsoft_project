@@ -6,7 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 import edu.iis.powp.appext.FeaturesManager;
+import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
+import edu.iis.powp.command.SetPositionCommand;
+import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.observer.Subscriber;
 import edu.iis.powp.zoom.ZoomManager;
 import edu.iis.powp.zoom.prototype.ZoomInPrototypeX2;
@@ -18,24 +21,46 @@ import edu.iis.powp.zoom.prototype.ZoomPrototypeModule;
 
 public class SelectRunCurrentCommandOptionListener implements ActionListener, Subscriber {
 	int zoom = 1; 
+	ZoomPrototype prototype;
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		initializePrototypes();
         List<ZoomPrototype> prototypes = new ArrayList<>();
 		switch(zoom) {
 		case 1:
+			createCancer();
 			IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
 			command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
 			break;
-		case 2:
-			ZoomPrototype prototype = ZoomPrototypeModule.createPrototype("ZoomInX" + String.valueOf(zoom));
+		default:
+			prototype = ZoomPrototypeModule.createPrototype("ZoomX" + String.valueOf(zoom));
 			prototypes.add(prototype);
 			prototype.execute();
-		case -2:
-			
+			break;	
 		}
 		
 		
+	}
+	
+	public void createCancer() {
+		List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>(); 
+		commands.add(new SetPositionCommand(-20, -50));
+		commands.add(new DrawToCommand(-20, -50));
+		commands.add(new SetPositionCommand(-20, -40));
+		commands.add(new DrawToCommand(-20, 50));
+		commands.add(new SetPositionCommand(0, -50));
+		commands.add(new DrawToCommand(0, -50));
+		commands.add(new SetPositionCommand(0, -40));
+		commands.add(new DrawToCommand(0, 50));
+		commands.add(new SetPositionCommand(70, -50));
+		commands.add(new DrawToCommand(20, -50));
+		commands.add(new DrawToCommand(20, 0));
+		commands.add(new DrawToCommand(70, 0));
+		commands.add(new DrawToCommand(70, 50));
+		commands.add(new DrawToCommand(20, 50));
+		
+	    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
+	    manager.setCurrentCommand(commands, "TopSecretCommand");
 	}
 	
 	 public static void initializePrototypes() {
