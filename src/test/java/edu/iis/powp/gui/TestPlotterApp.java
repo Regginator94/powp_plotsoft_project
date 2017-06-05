@@ -76,7 +76,7 @@ public class TestPlotterApp {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(FeaturesManager.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
-		ZoomManagerWindow zoomManager = new ZoomManagerWindow(FeaturesManager.getPlotterCommandManager());
+		ZoomManagerWindow zoomManager = new ZoomManagerWindow(FeaturesManager.getZoomManager());
 		application.addWindowComponent("Zoom Manager", zoomManager);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
