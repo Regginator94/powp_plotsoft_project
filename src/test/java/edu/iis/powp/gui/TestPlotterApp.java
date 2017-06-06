@@ -16,6 +16,7 @@ import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
+import edu.iis.powp.zoom.gui.ZoomManagerWindow;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
@@ -44,8 +45,10 @@ public class TestPlotterApp {
 	 */
 	private static void setupCommandTests(Application application) {
 		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
-
-		application.addTest("Run command", new SelectRunCurrentCommandOptionListener());
+		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener();
+		FeaturesManager.setupZoomManager();
+		FeaturesManager.getZoomManager().getChangePublisher().addSubscriber(currentCommandOptionListener);
+		application.addTest("Run command", currentCommandOptionListener);
 
 	}
 
@@ -73,6 +76,8 @@ public class TestPlotterApp {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(FeaturesManager.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
+		ZoomManagerWindow zoomManager = new ZoomManagerWindow(FeaturesManager.getZoomManager());
+		application.addWindowComponent("Zoom Manager", zoomManager);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
 				commandManager);
