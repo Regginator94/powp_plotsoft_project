@@ -33,6 +33,9 @@ public class ZoomListener implements ActionListener, Subscriber {
 	public void performZooming(){
 		initializePrototypes();
 		System.out.println("ZOOM"+zoom);
+		if(FeaturesManager.getPlotterCommandManager().getCurrentCommand() == null) {
+			return;
+		}
 		switch(zoom) {
 		case 1:
 			FeaturesManager.drawerController().clearPanel();
@@ -42,10 +45,6 @@ public class ZoomListener implements ActionListener, Subscriber {
 			
 			break;
 		default:
-			if(FeaturesManager.getPlotterCommandManager().getCurrentCommand() == null) {
-				command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
-				command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
-			}
 			if(drawAccess) {
 				prototype = ZoomPrototypeModule.createPrototype("ZoomX" + String.valueOf(zoom));
 				prototypes.add(prototype);

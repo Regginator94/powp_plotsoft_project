@@ -13,6 +13,7 @@ import edu.iis.powp.appext.FeaturesManager;
 import edu.iis.powp.command.gui.CommandManagerWindow;
 import edu.iis.powp.command.gui.CommandManagerWindowCommandChangeObserver;
 import edu.iis.powp.events.SelectLoadSecretCommandOptionListener;
+import edu.iis.powp.events.SelectLoadSpecialCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
@@ -45,6 +46,7 @@ public class TestPlotterApp {
 	 */
 	private static void setupCommandTests(Application application) {
 		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
+		application.addTest("Load special command", new SelectLoadSpecialCommandOptionListener());
 		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener();
 		FeaturesManager.setupZoomManager();
 		application.addTest("Run command", currentCommandOptionListener);
