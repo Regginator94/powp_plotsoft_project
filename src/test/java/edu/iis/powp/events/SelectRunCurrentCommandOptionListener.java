@@ -42,7 +42,7 @@ public class SelectRunCurrentCommandOptionListener implements ActionListener, Su
 		
 	}
 	
-	public void createCancer() {
+	public void createSickDrawingCommandList() {
 		List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>(); 
 		commands.add(new SetPositionCommand(-20, -50));
 		commands.add(new DrawToCommand(-20, -50));
