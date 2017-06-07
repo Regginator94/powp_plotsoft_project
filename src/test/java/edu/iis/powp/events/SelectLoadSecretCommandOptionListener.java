@@ -10,9 +10,16 @@ import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
+import edu.iis.powp.history.PlotterStateHistory;
 
 public class SelectLoadSecretCommandOptionListener implements ActionListener {
 
+	private PlotterStateHistory history;
+	
+	public SelectLoadSecretCommandOptionListener(PlotterStateHistory history) {
+		this.history = history;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
@@ -35,6 +42,7 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 			
 		    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
 		    manager.setCurrentCommand(commands, "TopSecretCommand");
+		    history.addCommandOriginalState("TopSecretCommand", commands);
 		}
 	}
 }

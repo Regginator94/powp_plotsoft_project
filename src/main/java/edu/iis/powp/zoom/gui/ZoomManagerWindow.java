@@ -11,6 +11,7 @@ import javax.swing.JTextArea;
 
 import edu.iis.powp.appext.FeaturesManager;
 import edu.iis.powp.command.manager.PlotterCommandManager;
+import edu.iis.powp.history.PlotterStateHistory;
 import edu.iis.powp.window.WindowComponent;
 import edu.iis.powp.zoom.ZoomManager;
 public class ZoomManagerWindow extends JFrame implements WindowComponent{
@@ -22,13 +23,13 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 	 */
 	private static final long serialVersionUID = 9204679248304669948L;
 
-	public ZoomManagerWindow(ZoomManager zoomManager) {
+	public ZoomManagerWindow(ZoomManager zoomManager, PlotterStateHistory plotterStateHistory) {
 		this.setTitle("Zoom Manager");
 		this.setSize(400, 400);
 		Container content = this.getContentPane();
 		content.setLayout(new GridBagLayout());
 		this.zoomManager = zoomManager;
-		ZoomListener zoomListener = new ZoomListener();
+		ZoomListener zoomListener = new ZoomListener(plotterStateHistory);
 		GridBagConstraints c = new GridBagConstraints();
 		FeaturesManager.getZoomManager().getChangePublisher().addSubscriber(zoomListener);
 		observerListField = new JTextArea("");

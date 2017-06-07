@@ -17,12 +17,14 @@ import edu.iis.powp.events.SelectLoadSpecialCommandOptionListener;
 import edu.iis.powp.events.SelectRunCurrentCommandOptionListener;
 import edu.iis.powp.events.SelectTestFigure2OptionListener;
 import edu.iis.powp.events.predefine.SelectTestFigureOptionListener;
+import edu.iis.powp.history.PlotterStateHistory;
 import edu.iis.powp.zoom.gui.ZoomManagerWindow;
 import edu.kis.powp.drawer.panel.DrawPanelController;
 import edu.kis.powp.drawer.shape.LineFactory;
 
 public class TestPlotterApp {
 	private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
+	private static PlotterStateHistory plotterStateHistory = new PlotterStateHistory();
 
 	/**
 	 * Setup test concerning preset figures in context.
@@ -45,9 +47,9 @@ public class TestPlotterApp {
 	 *            Application context.
 	 */
 	private static void setupCommandTests(Application application) {
-		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
-		application.addTest("Load special command", new SelectLoadSpecialCommandOptionListener());
-		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener();
+		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener(plotterStateHistory));
+		application.addTest("Load special command", new SelectLoadSpecialCommandOptionListener(plotterStateHistory));
+		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener(plotterStateHistory);
 		FeaturesManager.setupZoomManager();
 		application.addTest("Run command", currentCommandOptionListener);
 
@@ -77,7 +79,7 @@ public class TestPlotterApp {
 
 		CommandManagerWindow commandManager = new CommandManagerWindow(FeaturesManager.getPlotterCommandManager());
 		application.addWindowComponent("Command Manager", commandManager);
-		ZoomManagerWindow zoomManager = new ZoomManagerWindow(FeaturesManager.getZoomManager());
+		ZoomManagerWindow zoomManager = new ZoomManagerWindow(FeaturesManager.getZoomManager(), plotterStateHistory);
 		application.addWindowComponent("Zoom Manager", zoomManager);
 
 		CommandManagerWindowCommandChangeObserver windowObserver = new CommandManagerWindowCommandChangeObserver(
