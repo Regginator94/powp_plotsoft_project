@@ -36,7 +36,7 @@ public class ZoomOutPrototypeX3 implements ZoomPrototype {
 	   
 	   
 	    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
-	    manager.setCurrentCommand(commands, "TopSecretCommand");
+	    manager.setCurrentCommand(commands, "Command(s) zoomed out 2x");
 	    IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
 		command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
 
