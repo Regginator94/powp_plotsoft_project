@@ -31,7 +31,7 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		observerListField = new JTextArea("");
 		observerListField.setEditable(false);
 
-		JButton btnZoom1 = new JButton("Zoom 1x");
+		JButton btnZoom1 = new JButton("Original size");
 		btnZoom1.addActionListener((ActionEvent e) -> this.zoomManager.setCurrentZoom(1));
 		c.fill = GridBagConstraints.BOTH;
 		c.weightx = 1;

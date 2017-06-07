@@ -20,26 +20,38 @@ import edu.iis.powp.zoom.prototype.ZoomPrototype;
 import edu.iis.powp.zoom.prototype.ZoomPrototypeModule;
 
 public class SelectRunCurrentCommandOptionListener implements ActionListener, Subscriber {
-	int zoom = 1; 
-	ZoomPrototype prototype;
+	private int zoom; 
+	private boolean drawAccess = false;
+	private ZoomPrototype prototype;
+
+    List<ZoomPrototype> prototypes = new ArrayList<>();
+    IPlotterCommand command;
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		initializePrototypes();
-        List<ZoomPrototype> prototypes = new ArrayList<>();
+		initializePrototypes(); 
 		switch(zoom) {
 		case 1:
+			FeaturesManager.drawerController().clearPanel();
 			createSickDrawingCommandList();
-			IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
+			command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
 			command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
+			
 			break;
 		default:
-			prototype = ZoomPrototypeModule.createPrototype("ZoomX" + String.valueOf(zoom));
-			prototypes.add(prototype);
-			prototype.execute();
-			break;	
+			if(FeaturesManager.getPlotterCommandManager().getCurrentCommand() == null) {
+				command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
+				command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
+			}
+			if(drawAccess) {
+				prototype = ZoomPrototypeModule.createPrototype("ZoomX" + String.valueOf(zoom));
+				prototypes.add(prototype);
+				FeaturesManager.drawerController().clearPanel();
+				prototype.execute();
+				drawAccess = false;
+	
+			}
+			break;			
 		}
-		
-		
 	}
 	
 	public void createSickDrawingCommandList() {
@@ -60,7 +72,7 @@ public class SelectRunCurrentCommandOptionListener implements ActionListener, Su
 		commands.add(new DrawToCommand(20, 50));
 		
 	    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
-	    manager.setCurrentCommand(commands, "TopSecretCommand");
+	    manager.setPlotterCommands(commands);
 	}
 	
 	 public static void initializePrototypes() {
@@ -74,7 +86,6 @@ public class SelectRunCurrentCommandOptionListener implements ActionListener, Su
 	@Override
 	public void update() {
 		this.zoom = FeaturesManager.getZoomManager().getCurrentZoom();
-
-		
+		this.drawAccess = true;
 	}
 }
