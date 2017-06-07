@@ -28,7 +28,7 @@ public class SelectRunCurrentCommandOptionListener implements ActionListener, Su
         List<ZoomPrototype> prototypes = new ArrayList<>();
 		switch(zoom) {
 		case 1:
-			createCancer();
+			createSickDrawingCommandList();
 			IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
 			command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
 			break;
