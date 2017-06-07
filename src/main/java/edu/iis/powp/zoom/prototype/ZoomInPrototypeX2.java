@@ -36,7 +36,7 @@ public class ZoomInPrototypeX2 implements ZoomPrototype {
 	   
 	   
 	    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
-	    manager.setCurrentCommand(commands, "Command(s) zoomed in 2x");
+	    manager.setCurrentCommand(commands, FeaturesManager.getPlotterCommandManager().getCurrentCommand().toString());
 	    IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
 		command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
 
