@@ -47,7 +47,6 @@ public class TestPlotterApp {
 		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
 		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener();
 		FeaturesManager.setupZoomManager();
-		FeaturesManager.getZoomManager().getChangePublisher().addSubscriber(currentCommandOptionListener);
 		application.addTest("Run command", currentCommandOptionListener);
 
 	}
