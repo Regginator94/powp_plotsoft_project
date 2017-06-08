@@ -3,18 +3,29 @@ package edu.iis.powp.zoom.prototype;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Module for prototypes.
+ * 
+ */
 public class ZoomPrototypeModule {
-	// 2. "registry" of prototypical objs
+
+	
     private static List<ZoomPrototype> prototypes = new ArrayList<>();
 
-    // Adds a feature to the Prototype attribute of the PrototypesModule class
-    // obj  The feature to be added to the Prototype attribute
+    /**
+     * Add single prototype to the list.
+     * 
+     */
     public static void addPrototype(ZoomPrototype p) {
         prototypes.add(p);
     }
 
+    /**
+     * Create a prototype by a given name.
+     * 
+     */
     public static ZoomPrototype createPrototype(String name) {
-        // 4. The "virtual ctor"
+
         for (ZoomPrototype p : prototypes) {
             if (p.getName().equals(name)) {
                 return p.clone();

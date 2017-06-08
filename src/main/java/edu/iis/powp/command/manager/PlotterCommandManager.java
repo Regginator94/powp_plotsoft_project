@@ -86,7 +86,11 @@ public class PlotterCommandManager
 	}
 
 	public List<IPlotterCommand> getPlotterCommands() {
-	
 		return  plotterCommands;
 	}
+	
+	public void setPlotterCommands(List<IPlotterCommand> plotterCommands) {
+		this.plotterCommands = plotterCommands;
+	}
+	
 }
