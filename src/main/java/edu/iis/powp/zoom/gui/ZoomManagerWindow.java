@@ -10,7 +10,6 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import edu.iis.powp.appext.FeaturesManager;
-import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.history.PlotterStateHistory;
 import edu.iis.powp.window.WindowComponent;
 import edu.iis.powp.zoom.ZoomManager;
@@ -74,14 +73,7 @@ public class ZoomManagerWindow extends JFrame implements WindowComponent{
 		c.gridx = 0;
 		c.weighty = 1;
 		content.add(btnZoom03, c);
-		
-		
-
-
-		
 	}
-
-
 
 	@Override
 	public void HideIfVisibleAndShowIfHidden() {

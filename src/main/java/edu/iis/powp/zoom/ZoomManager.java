@@ -3,8 +3,10 @@ package edu.iis.powp.zoom;
 import edu.iis.powp.observer.Publisher;
 
 public class ZoomManager {
+	
 	private int zoom = 0;
 	private Publisher changePublisher = new Publisher(); 
+	
 	public Publisher getChangePublisher() {
 		return changePublisher;
 	}

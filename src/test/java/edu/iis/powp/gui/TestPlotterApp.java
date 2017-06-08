@@ -46,12 +46,11 @@ public class TestPlotterApp {
 	 */
 	private static void setupCommandTests(Application application) {
 		FeaturesManager.setupPlotterStateHistory();
-		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener(FeaturesManager.history()));
+		application.addTest("Load secret command", new SelectLoadSecretCommandOptionListener());
 		application.addTest("Load special command", new SelectLoadSpecialCommandOptionListener());
 		SelectRunCurrentCommandOptionListener currentCommandOptionListener = new SelectRunCurrentCommandOptionListener();
 		FeaturesManager.setupZoomManager();
 		application.addTest("Run command", currentCommandOptionListener);
-
 	}
 
 	/**
