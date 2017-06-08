@@ -46,7 +46,7 @@ public class FeaturesManager {
 		}
 	}
 
-	private static void setupCommandManager() {
+	public static void setupCommandManager() {
 		commandManager = new PlotterCommandManager();
 
 		LoggerCommandChangeObserver loggerObserver = new LoggerCommandChangeObserver();

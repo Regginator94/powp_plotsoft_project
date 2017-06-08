@@ -61,7 +61,6 @@ public class ZoomListener implements ActionListener, Subscriber {
 				prototype.execute();
 				double currentAbsoluteZoomValue = zoom > 0 ? FeaturesManager.history().getAbsoluteZoomValue() * (double)zoom : FeaturesManager.history().getAbsoluteZoomValue() / (double)Math.abs(zoom);
 				FeaturesManager.history().setAbsoluteZoomValue(currentAbsoluteZoomValue);
-				System.out.println(currentAbsoluteZoomValue);
 				break;			
 		}
 	}
