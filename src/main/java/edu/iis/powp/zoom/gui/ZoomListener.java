@@ -4,11 +4,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 import edu.iis.powp.appext.FeaturesManager;
-import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
-import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
 import edu.iis.powp.history.PlotterStateHistory;
 import edu.iis.powp.observer.Subscriber;
@@ -47,27 +46,35 @@ public class ZoomListener implements ActionListener, Subscriber {
 		
 		switch(zoom) {
 			case 1:
+				Map <String, List<IPlotterCommand>> map = FeaturesManager.history().getCommandOriginalState();
 				FeaturesManager.drawerController().clearPanel();
-				IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
-				PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
-			    manager.setCurrentCommand(history.getCommandOriginalState().get(command.toString()), command.toString());
-				command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
+				for (String key : map.keySet()) {
+					PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
+				    manager.setCurrentCommand((List<IPlotterCommand>)map.get(key), key);
+				    IPlotterCommand command = FeaturesManager.getPlotterCommandManager().getCurrentCommand();
+					command.execute(FeaturesManager.getDriverManager().getCurrentPlotter());
+					history.updateCommandCurrentState(key, (List<IPlotterCommand>)map.get(key));
+				}
+				history.setAbsoluteZoomValue(1);
 				break;
 			default:
 				prototype = ZoomPrototypeModule.createPrototype("ZoomX" + String.valueOf(zoom));
 				prototypes.add(prototype);
 				FeaturesManager.drawerController().clearPanel();
 				prototype.execute();
+				double currentAbsoluteZoomValue = zoom > 0 ? history.getAbsoluteZoomValue() * (double)zoom : history.getAbsoluteZoomValue() / (double)Math.abs(zoom);
+				history.setAbsoluteZoomValue(currentAbsoluteZoomValue);
+				System.out.println(currentAbsoluteZoomValue);
 				break;			
 		}
 	}
 	
 	 public static void initializePrototypes() {
-	        ZoomPrototypeModule.addPrototype(new ZoomInPrototypeX2());
-	        ZoomPrototypeModule.addPrototype(new ZoomInPrototypeX3());
-	        ZoomPrototypeModule.addPrototype(new ZoomOutPrototypeX2());
-	        ZoomPrototypeModule.addPrototype(new ZoomOutPrototypeX3());
-	    }
+        ZoomPrototypeModule.addPrototype(new ZoomInPrototypeX2());
+        ZoomPrototypeModule.addPrototype(new ZoomInPrototypeX3());
+        ZoomPrototypeModule.addPrototype(new ZoomOutPrototypeX2());
+        ZoomPrototypeModule.addPrototype(new ZoomOutPrototypeX3());
+    }
 	
 
 	@Override

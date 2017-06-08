@@ -10,15 +10,18 @@ public class PlotterStateHistory {
 	
 	private double absoluteZoomValue;
 	private Map<String, List<IPlotterCommand>> commandOriginalStates;
+	private Map<String, List<IPlotterCommand>> commandCurrentStates;
 	
 	public PlotterStateHistory() {
 		absoluteZoomValue = 1;
 		commandOriginalStates = new HashMap<String, List<IPlotterCommand>>();
+		commandCurrentStates = new HashMap<String, List<IPlotterCommand>>();
 	}
 	
 	public void clear() {
 		absoluteZoomValue = 1;
 		commandOriginalStates.clear();
+		commandCurrentStates.clear();
 	}
 	
 	public void addCommandOriginalState(String name, List<IPlotterCommand> commands) {
@@ -39,6 +42,18 @@ public class PlotterStateHistory {
 
 	public void setCommandOriginalState(Map<String, List<IPlotterCommand>> commandOriginalState) {
 		this.commandOriginalStates = commandOriginalState;
+	}
+
+	public Map<String, List<IPlotterCommand>> getCommandCurrentStates() {
+		return commandCurrentStates;
+	}
+	
+	public void setCommandCurrentStates(Map<String, List<IPlotterCommand>> commandCurrentStates) {
+		this.commandCurrentStates = commandCurrentStates;
+	}
+
+	public void updateCommandCurrentState(String name, List<IPlotterCommand> commands) {
+		commandCurrentStates.put(name, commands);
 	}
 	
 }

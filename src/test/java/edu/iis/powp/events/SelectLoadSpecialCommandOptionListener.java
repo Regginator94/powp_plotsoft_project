@@ -10,32 +10,27 @@ import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
-import edu.iis.powp.history.PlotterStateHistory;
 
 public class SelectLoadSpecialCommandOptionListener implements ActionListener {
 
-	private PlotterStateHistory history;
-	
-	public SelectLoadSpecialCommandOptionListener(PlotterStateHistory history) {
-		this.history = history;
-	}
-	
 	@Override
 	public void actionPerformed(ActionEvent e)
 	{
-		if (!FeaturesManager.getPlotterCommandManager().getCurrentCommandString().equals("TopSpecialCommand")) {
+		if (!FeaturesManager.history().getCommandOriginalState().containsKey("TopSpecialCommand")) {
 		    List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>();
-		    commands.add(new SetPositionCommand(0, 0));
-			commands.add(new DrawToCommand(0, 0));
-			commands.add(new DrawToCommand(20, 0));
-			commands.add(new DrawToCommand(20, 20));
-			commands.add(new DrawToCommand(20, 40));
-			commands.add(new DrawToCommand(40, 40));
-			commands.add(new DrawToCommand(0, 0));
+		    double zoom = FeaturesManager.history().getAbsoluteZoomValue();
+		    commands.add(new SetPositionCommand((int)zoom*0, (int)zoom*0));
+			commands.add(new DrawToCommand((int)zoom*0, (int)zoom*0));
+			commands.add(new DrawToCommand((int)zoom*20, (int)zoom*0));
+			commands.add(new DrawToCommand((int)zoom*20, (int)zoom*20));
+			commands.add(new DrawToCommand((int)zoom*20, (int)zoom*40));
+			commands.add(new DrawToCommand((int)zoom*40, (int)zoom*40));
+			commands.add(new DrawToCommand((int)zoom*0, (int)zoom*0));
 			
 		    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
 		    manager.setCurrentCommand(commands, "TopSpecialCommand");
-		    history.addCommandOriginalState("TopSpecialCommand", commands);
+		    FeaturesManager.history().addCommandOriginalState("TopSpecialCommand", commands);
+		    FeaturesManager.history().updateCommandCurrentState("TopSpecialCommand", commands);
 		}
 	}
 }

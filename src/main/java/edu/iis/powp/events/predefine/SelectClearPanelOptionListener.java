@@ -12,5 +12,6 @@ public class SelectClearPanelOptionListener implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         FeaturesManager.drawerController().clearPanel();
+        FeaturesManager.history().clear();
     }
 }
