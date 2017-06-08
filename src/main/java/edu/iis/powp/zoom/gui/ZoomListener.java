@@ -36,7 +36,6 @@ public class ZoomListener implements ActionListener, Subscriber {
 	
 	public void performZooming(){
 		initializePrototypes();
-		System.out.println("ZOOM"+zoom);
 		
 		if (FeaturesManager.getPlotterCommandManager().getCurrentCommand() == null) {
 			return;
