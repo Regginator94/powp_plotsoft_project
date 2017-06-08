@@ -10,7 +10,6 @@ import edu.iis.powp.command.DrawToCommand;
 import edu.iis.powp.command.IPlotterCommand;
 import edu.iis.powp.command.SetPositionCommand;
 import edu.iis.powp.command.manager.PlotterCommandManager;
-import edu.iis.powp.history.PlotterStateHistory;
 
 public class SelectLoadSecretCommandOptionListener implements ActionListener {
 
@@ -21,6 +20,25 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 		if (!FeaturesManager.history().getCommandOriginalState().containsKey("TopSecretCommand")) {
 		    List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>(); 
 		    double zoom = FeaturesManager.history().getAbsoluteZoomValue();
+		    
+		    commands.add(new SetPositionCommand(-20, -50));
+			commands.add(new DrawToCommand(-20, -50));
+			commands.add(new SetPositionCommand(-20, -40));
+			commands.add(new DrawToCommand(-20, 50));
+			commands.add(new SetPositionCommand(0, -50));
+			commands.add(new DrawToCommand(0, -50));
+			commands.add(new SetPositionCommand(0, -40));
+			commands.add(new DrawToCommand(0, 50));
+			commands.add(new SetPositionCommand(70, -50));
+			commands.add(new DrawToCommand(20, -50));
+			commands.add(new DrawToCommand(20, 0));
+			commands.add(new DrawToCommand(70, 0));
+			commands.add(new DrawToCommand(70, 50));
+			commands.add(new DrawToCommand(20, 50));
+		    FeaturesManager.history().addCommandOriginalState("TopSecretCommand", commands);
+		    commands.clear();
+		    
+		    // size after zooming
 			commands.add(new SetPositionCommand((int)zoom*-20, (int)zoom*-50));
 			commands.add(new DrawToCommand((int)zoom*-20, (int)zoom*-50));
 			commands.add(new SetPositionCommand((int)zoom*-20, (int)zoom*-40));
@@ -38,7 +56,6 @@ public class SelectLoadSecretCommandOptionListener implements ActionListener {
 			
 		    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
 		    manager.setCurrentCommand(commands, "TopSecretCommand");
-		    FeaturesManager.history().addCommandOriginalState("TopSecretCommand", commands);
 		    FeaturesManager.history().updateCommandCurrentState("TopSecretCommand", commands);
 		}
 	}

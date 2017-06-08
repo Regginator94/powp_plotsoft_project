@@ -2,6 +2,10 @@ package edu.iis.powp.zoom;
 
 import edu.iis.powp.observer.Publisher;
 
+/**
+ * Class responsible for setting and getting last used zoom value.
+ * 
+ */
 public class ZoomManager {
 	
 	private int zoom = 0;

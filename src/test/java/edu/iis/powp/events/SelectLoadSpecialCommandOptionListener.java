@@ -19,6 +19,19 @@ public class SelectLoadSpecialCommandOptionListener implements ActionListener {
 		if (!FeaturesManager.history().getCommandOriginalState().containsKey("TopSpecialCommand")) {
 		    List<IPlotterCommand> commands = new ArrayList<IPlotterCommand>();
 		    double zoom = FeaturesManager.history().getAbsoluteZoomValue();
+		    
+		    // original size
+		    commands.add(new SetPositionCommand(0, 0));
+			commands.add(new DrawToCommand(0, 0));
+			commands.add(new DrawToCommand(20, 0));
+			commands.add(new DrawToCommand(20, 20));
+			commands.add(new DrawToCommand(20, 40));
+			commands.add(new DrawToCommand(40, 40));
+			commands.add(new DrawToCommand(0, 0));
+		    FeaturesManager.history().addCommandOriginalState("TopSpecialCommand", commands);
+		    commands.clear();
+		    
+		    // size after zooming
 		    commands.add(new SetPositionCommand((int)zoom*0, (int)zoom*0));
 			commands.add(new DrawToCommand((int)zoom*0, (int)zoom*0));
 			commands.add(new DrawToCommand((int)zoom*20, (int)zoom*0));
@@ -29,7 +42,6 @@ public class SelectLoadSpecialCommandOptionListener implements ActionListener {
 			
 		    PlotterCommandManager manager = FeaturesManager.getPlotterCommandManager();
 		    manager.setCurrentCommand(commands, "TopSpecialCommand");
-		    FeaturesManager.history().addCommandOriginalState("TopSpecialCommand", commands);
 		    FeaturesManager.history().updateCommandCurrentState("TopSpecialCommand", commands);
 		}
 	}

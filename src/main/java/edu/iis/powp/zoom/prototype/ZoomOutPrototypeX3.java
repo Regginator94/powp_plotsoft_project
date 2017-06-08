@@ -13,6 +13,7 @@ import edu.iis.powp.command.manager.PlotterCommandManager;
 public class ZoomOutPrototypeX3 implements ZoomPrototype {
 
 	private String name = "ZoomX-3";
+	
 	@Override
 	public ZoomPrototype clone() {
 		return new ZoomOutPrototypeX3();

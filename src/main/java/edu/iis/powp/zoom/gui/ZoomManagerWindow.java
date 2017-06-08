@@ -10,25 +10,28 @@ import javax.swing.JFrame;
 import javax.swing.JTextArea;
 
 import edu.iis.powp.appext.FeaturesManager;
-import edu.iis.powp.history.PlotterStateHistory;
 import edu.iis.powp.window.WindowComponent;
 import edu.iis.powp.zoom.ZoomManager;
+
+/**
+ * Window with buttons being used for zooming.
+ * 
+ */
+
 public class ZoomManagerWindow extends JFrame implements WindowComponent{
 
 	private JTextArea observerListField;
 	private ZoomManager zoomManager;
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 9204679248304669948L;
 
-	public ZoomManagerWindow(ZoomManager zoomManager, PlotterStateHistory plotterStateHistory) {
+	public ZoomManagerWindow(ZoomManager zoomManager) {
 		this.setTitle("Zoom Manager");
 		this.setSize(400, 400);
 		Container content = this.getContentPane();
 		content.setLayout(new GridBagLayout());
 		this.zoomManager = zoomManager;
-		ZoomListener zoomListener = new ZoomListener(plotterStateHistory);
+		ZoomListener zoomListener = new ZoomListener();
 		GridBagConstraints c = new GridBagConstraints();
 		FeaturesManager.getZoomManager().getChangePublisher().addSubscriber(zoomListener);
 		observerListField = new JTextArea("");
